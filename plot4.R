@@ -12,7 +12,6 @@ if (!file.exists("exdata_data_household_power_consumption/household_power_consum
     }
 }
 
-library(dplyr)
 library(data.table)
 
 #Read specific lines
@@ -48,9 +47,27 @@ rm(DT.DF, headers, DateTime) # free some memory
 Sys.setlocale("LC_TIME", "C") # my system is greek so I found this solution for the days to appear in english
 
 #Plot and png export
-png(filename="plot2.png") # open png graphics device
 
-plot(proj1$DateTime, proj1$Global_active_power, xlab="" ,ylab="Global Active Power (kilowatts)", type="l")
+png(filename="plot4.png") # open png graphics device
+
+par(mfrow = c(2,2))
+#plot position 1,1 (row, col)
+plot(proj1$DateTime, proj1$Global_active_power, xlab="" ,ylab="Global Active Power", type="l")
+
+#plot position 1,2
+plot(proj1$DateTime, proj1$Voltage, xlab="datetime" ,ylab="Voltage", type="l")
+
+#plot position 2,1
+plot(proj1$DateTime, proj1$Sub_metering_1, xlab="" ,ylab="Energy sub metering", type="n")
+points(proj1$DateTime, proj1$Sub_metering_1, type = "l")
+points(proj1$DateTime, proj1$Sub_metering_2, type = "l", col = "red")
+points(proj1$DateTime, proj1$Sub_metering_3, type = "l", col="blue")
+legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),lty=1, col = c("black", "red", "blue"), bty="n")
+
+#plot position 2,2
+plot(proj1$DateTime, proj1$Global_reactive_power, xlab="datetime" ,ylab="Global_reactive_power", type="l")
+
+
 dev.off()
 
 
