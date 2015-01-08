@@ -33,5 +33,5 @@ proj1$Date <- as.Date(proj1$Date, "%d/%m/%Y")
 #Histogram plot and png export
 png(filename="plot1.png") # open png graphics device
 
-hist(proj1$Global_active_power, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)", ylim=range(1200, 6))
+hist(proj1$Global_active_power, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
 dev.off()
